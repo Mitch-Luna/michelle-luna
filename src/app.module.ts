@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProductosModule } from './productos/productos.module';
-import { CategoriasModule } from './categorias/categorias.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
@@ -10,12 +9,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     type: 'postgres',
     host: 'localhost',
     port: 5432,
-    username: 'root',
+    username: 'postgres',
     password: 'root',
     database: 'ecomerce-e',
     entities: [],
     synchronize: true,
-  }),ProductosModule, CategoriasModule],
+  }),ProductosModule],
   controllers: [AppController],
   providers: [AppService],
 })
