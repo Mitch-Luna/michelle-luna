@@ -2,18 +2,21 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Producto {
-    @PrimaryGeneratedColumn('uuid')
+@PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({ type: 'text' })
-  marca: string;
+  cantidad: string;
+
+  @Column({ type: 'text' })
+  fecha_ingreso: number;
+
+  @Column({ type: 'text' })
+  fecha_salida: number;
 
   @Column({ type: 'numeric' })
-  precio: number;
+  valor: number;
 
   @Column({ type: 'text' })
-  procesador: string;
-
-  @Column({ type: 'text' })
-  memoriaRAM: string;
+  categoria: string;
 }

@@ -8,16 +8,16 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { ProductsService } from './productos.service';
-import { CreateProductoDto } from './dto/create-producto.dto';
+import { VentasService } from './ventas.service';
+import { CreateVentaDto } from './dto/create-venta.dto';
 
-@Controller('productos')
-export class ProductsController {
-  constructor(private readonly productServiceRepo: ProductsService) {}
+@Controller('ventas')
+export class VentasController {
+  constructor(private readonly productServiceRepo: VentasService) {}
 
   //Metodo para crear un producto
   @Post()
-  create(@Body() productoDto: CreateProductoDto) {
+  create(@Body() productoDto: CreateVentaDto) {
     return this.productServiceRepo.create(productoDto);
   }
 
@@ -43,7 +43,7 @@ export class ProductsController {
   @Patch(':id')
   update(
     @Param('id', ParseUUIDPipe) id: string,
-    @Body() updateProductoDto: CreateProductoDto,
+    @Body() updateProductoDto: CreateVentaDto,
   ) {
     return this.productServiceRepo.update(id, updateProductoDto);
   }

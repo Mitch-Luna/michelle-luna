@@ -1,26 +1,49 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Producto } from './entities/producto.entity';
 import { CreateProductoDto } from './dto/create-producto.dto';
-import { UpdateProductoDto } from './dto/update-producto.dto';
 
 @Injectable()
-export class ProductosService {
-  create(createProductoDto: CreateProductoDto) {
-    return 'This action adds a new producto';
+export class ProductsService {
+  constructor(
+    @InjectRepository(Producto)
+    private readonly productRepository: Repository<Producto>,
+  ) {}
+
+  //Metodo para crear un producto
+  async create(productoDto: CreateProductoDto) {
+    const product = this.productRepository.create(productoDto);
+    await this.productRepository.save(product);
+
+    return product;
   }
 
+  //Metodo para visualizar todos los productos
   findAll() {
-    return `This action returns all productos`;
+    return this.productRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} producto`;
+  //Metodo para visualizar un producto especifico
+  findOne(id: string) {
+    return this.productRepository.findOneBy({ id });
   }
 
-  update(id: number, updateProductoDto: UpdateProductoDto) {
-    return `This action updates a #${id} producto`;
+  //Remover un producto especifico
+  async remove(id: string) {
+    const product = await this.findOne(id);
+    await this.productRepository.remove(product);
+    return 'Producto eliminado satisfactoriamente';
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} producto`;
+  //Actualizar un producto especifico
+  async update(id: string, cambios: CreateProductoDto) {
+    const findProduct = await this.findOne(id);
+    const updatedProducto = await this.productRepository.merge(
+      findProduct,
+      cambios,
+    );
+
+    return this.productRepository.save(updatedProducto);
   }
 }
