@@ -13,38 +13,38 @@ import { CreateVentaDto } from './dto/create-venta.dto';
 
 @Controller('ventas')
 export class VentasController {
-  constructor(private readonly productServiceRepo: VentasService) {}
+  constructor(private readonly ventaServiceRepo: VentasService) {}
 
-  //Metodo para crear un producto
+  //Metodo para crear un venta
   @Post()
-  create(@Body() productoDto: CreateVentaDto) {
-    return this.productServiceRepo.create(productoDto);
+  create(@Body() ventatoDto: CreateVentaDto) {
+    return this.ventaServiceRepo.create(ventatoDto);
   }
 
-  //Metodo para mostrar todos los productos
+  //Metodo para mostrar todas las ventas
   @Get()
   findAll() {
-    return this.productServiceRepo.findAll();
+    return this.ventaServiceRepo.findAll();
   }
 
-  //Metodo para mostrar un producto especifico
+  //Metodo para mostrar una venta en especifico
   @Get(':id')
   findOne(@Param('id', ParseUUIDPipe) id: string) {
-    return this.productServiceRepo.findOne(id);
+    return this.ventaServiceRepo.findOne(id);
   }
 
-  //Eliminar un producto especifico
+  //Eliminar una venta en especifico
   @Delete(':id')
   remove(@Param('id', ParseUUIDPipe) id: string) {
-    return this.productServiceRepo.remove(id);
+    return this.ventaServiceRepo.remove(id);
   }
 
   //Crear método patch, para actualizar
   @Patch(':id')
   update(
     @Param('id', ParseUUIDPipe) id: string,
-    @Body() updateProductoDto: CreateVentaDto,
+    @Body() updateVentaDto: CreateVentaDto,
   ) {
-    return this.productServiceRepo.update(id, updateProductoDto);
+    return this.ventaServiceRepo.update(id, updateVentaDto);
   }
 }
