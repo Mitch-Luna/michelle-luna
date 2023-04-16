@@ -1,17 +1,18 @@
-import { IsDate, IsNumber, IsString } from 'class-validator';
+import { IsAlphanumeric, IsNumber, IsString } from 'class-validator';
 export class CreateProductoDto {
-    @IsNumber()
-    cantidad:string;
+  @IsString()
+  cantidad: string;
 
-    @IsDate()
-    fecha_ingreso:string;
+  @IsAlphanumeric()
+  fecha_ingreso: number;
 
-    @IsDate()
-    fecha_salida:string;
+  @IsAlphanumeric()
+  fecha_salida: number;
 
-    @IsNumber()
-    valor: number;
+  @IsNumber()
+  valor: number;
 
-    @IsString()
-    categioria: string
+  @IsString()
+  categoria: string;
+
 }
