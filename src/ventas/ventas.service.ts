@@ -13,10 +13,10 @@ export class VentasService {
 
   //Metodo para crear un producto
   async create(ventaDto: CreateVentaDto) {
-    const product = this.ventasRepository.create(ventaDto);
-    await this.ventasRepository.save(product);
+    const venta = this.ventasRepository.create(ventaDto);
+    await this.ventasRepository.save(venta);
 
-    return product;
+    return venta;
   }
 
   //Metodo para visualizar todos los productos
@@ -31,19 +31,19 @@ export class VentasService {
 
   //Remover un producto especifico
   async remove(id: string) {
-    const product = await this.findOne(id);
-    await this.ventasRepository.remove(product);
-    return 'Producto eliminado satisfactoriamente';
+    const venta = await this.findOne(id);
+    await this.ventasRepository.remove(venta);
+    return 'Venta eliminado satisfactoriamente';
   }
 
   //Actualizar un producto especifico
   async update(id: string, cambios: CreateVentaDto) {
-    const findProduct = await this.findOne(id);
-    const updatedProducto = await this.ventasRepository.merge(
-      findProduct,
+    const findVenta = await this.findOne(id);
+    const updatedVenta = await this.ventasRepository.merge(
+      findVenta,
       cambios,
     );
 
-    return this.ventasRepository.save(updatedProducto);
+    return this.ventasRepository.save(updatedVenta);
   }
 }
